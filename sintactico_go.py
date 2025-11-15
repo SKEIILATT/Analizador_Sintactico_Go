@@ -576,7 +576,67 @@ parser = yacc.yacc()
 # FUNCIONES DE ANÁLISIS Y LOGGING - Jair
 # ============================================================================
 
+def analyze_file(filename):
+    """
+    Analiza sintácticamente un archivo de código Go.
+    """
+    global log_errors
+    log_errors = []
+    
+    try:
+        with open(filename, 'r', encoding='utf-8') as file:
+            data = file.read()
+    except FileNotFoundError:
+        print(f"Error: El archivo '{filename}' no fue encontrado.")
+        return
+    except Exception as e:
+        print(f"Error al leer el archivo: {e}")
+        return
+    
+    print(f"\n{'='*80}")
+    print(f"ANÁLISIS SINTÁCTICO DEL ARCHIVO: {filename}")
+    print(f"{'='*80}\n")
+    
+    # Realizar el análisis sintáctico
+    result = parser.parse(data, lexer=lexer)
+    
+    # Resumen
+    print(f"\n{'='*80}")
+    print(f"RESUMEN DEL ANÁLISIS SINTÁCTICO")
+    print(f"{'='*80}")
+    print(f"Total de errores encontrados: {len(log_errors)}")
+    
+    if log_errors:
+        print(f"\n{'='*80}")
+        print(f"ERRORES SINTÁCTICOS")
+        print(f"{'='*80}")
+        for error in log_errors:
+            print(error)
+    
+    # Generar archivo de log
+    generate_log(filename)
 
+def get_git_username():
+    """
+    Obtiene el nombre de usuario de Git configurado localmente.
+    """
+    try:
+        import subprocess
+        result = subprocess.run(
+            ['git', 'config', 'user.name'],
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            username = result.stdout.strip()
+            username = username.replace(' ', '')
+            return username
+        else:
+            return 'usuario'
+    except:
+        return 'usuario'
+    
 # ============================================================================
 # FIN CONTRIBUCIÓN: Jair
 # ============================================================================
