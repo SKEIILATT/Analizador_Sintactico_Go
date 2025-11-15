@@ -128,3 +128,31 @@ def p_lista_ids(p):
 # ============================================================================
 # FIN CONTRIBUCIÓN: Leonardo Macías
 # ============================================================================
+
+# ============================================================================
+# CONTRIBUCIÓN: Leonardo Macías (leodamac)
+# Sección: Arrays - Acceso e Inicialización
+# ============================================================================
+
+def p_expresion_array_acceso(p):
+    '''expresion : ID LBRACKET expresion RBRACKET'''
+    pass
+
+def p_array_literal(p):
+    '''expresion : LBRACKET INT_LITERAL RBRACKET tipo LBRACE lista_expresiones RBRACE
+                 | LBRACKET INT_LITERAL RBRACKET tipo LBRACE RBRACE
+                 | LBRACKET INT_LITERAL RBRACKET LBRACKET INT_LITERAL RBRACKET tipo LBRACE lista_filas_matriz RBRACE'''
+    pass
+
+def p_lista_filas_matriz(p):
+    '''lista_filas_matriz : lista_filas_matriz COMMA fila_matriz
+                          | fila_matriz'''
+    pass
+
+def p_fila_matriz(p):
+    '''fila_matriz : LBRACE lista_expresiones RBRACE'''
+    pass
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Leonardo Macías
+# ============================================================================
