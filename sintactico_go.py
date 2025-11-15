@@ -39,3 +39,42 @@ def p_programa(p):
 def p_package_decl(p):
     '''package_decl : PACKAGE ID'''
     pass
+
+# ============================================================================
+# IMPORTS 
+# ============================================================================
+
+def p_imports(p):
+    '''imports : import_decl imports
+               | import_decl
+               | empty'''
+    pass
+
+def p_import_decl(p):
+    '''import_decl : IMPORT STRING_LITERAL
+                   | IMPORT LPAREN lista_imports RPAREN
+                   | empty'''
+    pass
+
+def p_lista_imports(p):
+    '''lista_imports : lista_imports STRING_LITERAL
+                     | STRING_LITERAL'''
+    pass
+
+# ============================================================================
+# DECLARACIONES A NIVEL DE PROGRAMA EN GO
+# ============================================================================
+
+def p_declaraciones(p):
+    '''declaraciones : declaraciones declaracion
+                     | declaracion'''
+    pass
+
+def p_declaracion(p):
+    '''declaracion : funcion
+                   | declaracion_var_global
+                   | bloque_var
+                   | bloque_const
+                   | declaracion_const
+                   | empty'''
+    pass
