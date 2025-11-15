@@ -420,6 +420,39 @@ def p_expresion_primaria(p):
                  | NIL'''
     pass
 
+# ============================================================================
+# FUNCIONES BUILT-IN Y LLAMADAS
+# ============================================================================
+
+def p_expresion_llamada(p):
+    '''expresion : ID LPAREN lista_expresiones RPAREN
+                 | ID LPAREN RPAREN
+                 | ID DOT ID LPAREN lista_expresiones RPAREN
+                 | ID DOT ID LPAREN RPAREN'''
+    pass
+
+def p_expresion_make(p):
+    '''expresion : MAKE LPAREN tipo RPAREN
+                 | MAKE LPAREN tipo COMMA expresion RPAREN
+                 | MAKE LPAREN tipo COMMA expresion COMMA expresion RPAREN'''
+    pass
+
+def p_expresion_append(p):
+    '''expresion : APPEND LPAREN expresion COMMA lista_expresiones RPAREN
+                 | APPEND LPAREN expresion COMMA expresion RPAREN'''
+    pass
+
+def p_expresion_len(p):
+    '''expresion : LEN LPAREN expresion RPAREN'''
+    pass
+
+def p_expresion_delete(p):
+    '''expresion : DELETE LPAREN expresion COMMA expresion RPAREN'''
+    pass
+
+def p_expresion_new(p):
+    '''expresion : ID DOT ID LPAREN STRING_LITERAL RPAREN'''
+    pass
 
 # ============================================================================
 # FIN CONTRIBUCIÓN: Jair Palaguachi
