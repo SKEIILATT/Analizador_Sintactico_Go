@@ -413,8 +413,28 @@ def p_slice_operacion(p):
 # ============================================================================
 
 # ============================================================================
-# MANEJO DE ERRORES SINTÁCTICOS - Leonardo
+# CONTRIBUCIÓN: Leonardo Macias (leodamac)
+# MANEJO DE ERRORES SINTÁCTICOS
 # ============================================================================
+
+def p_error(p):
+    global log_errors
+    if p:
+        error_msg = f"Error de sintaxis en '{p.value}' (Token: {p.type}, Línea: {p.lineno})"
+        print(error_msg)
+        log_errors.append(error_msg)
+        # Intentar recuperarse
+        parser.errok()
+    else:
+        error_msg = "Error de sintaxis: fin de archivo inesperado"
+        print(error_msg)
+        log_errors.append(error_msg)
+
+# ============================================================================
+# CONSTRUCCIÓN DEL PARSER
+# ============================================================================
+
+parser = yacc.yacc()
 
 # ============================================================================
 # FIN CONTRIBUCIÓN: Leonardo
