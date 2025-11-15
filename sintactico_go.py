@@ -128,3 +128,132 @@ def p_lista_ids(p):
 # ============================================================================
 # FIN CONTRIBUCIÓN: Leonardo Macías
 # ============================================================================
+
+# ============================================================================
+# CONTRIBUCIÓN: Javier Gutiérrez (SKEIILATT)
+# Sección: Asignaciones
+# ============================================================================
+
+def p_asignacion(p):
+    '''asignacion : ID ASSIGN expresion
+                  | ID PLUS_ASSIGN expresion
+                  | ID MINUS_ASSIGN expresion
+                  | ID TIMES_ASSIGN expresion
+                  | ID DIVIDE_ASSIGN expresion
+                  | ID LBRACKET expresion RBRACKET ASSIGN expresion
+                  | TIMES ID ASSIGN expresion'''
+    pass
+
+def p_asignacion_multiple(p):
+    '''asignacion_multiple : lista_ids ASSIGN lista_expresiones'''
+    pass
+
+
+# ============================================================================
+# DECLARACIONES DE CONSTANTES
+# ============================================================================
+
+def p_declaracion_const(p):
+    '''declaracion_const : CONST ID ASSIGN expresion
+                         | CONST ID tipo ASSIGN expresion'''
+    pass
+
+def p_bloque_const(p):
+    '''bloque_const : CONST LPAREN lista_decl_const RPAREN'''
+    pass
+
+def p_lista_decl_const(p):
+    '''lista_decl_const : lista_decl_const decl_const_bloque
+                        | decl_const_bloque'''
+    pass
+
+def p_decl_const_bloque(p):
+    '''decl_const_bloque : ID ASSIGN expresion
+                         | ID tipo ASSIGN expresion'''
+    pass
+
+# ============================================================================
+# FUNCIONES
+# ============================================================================
+
+def p_funcion(p):
+    '''funcion : FUNC ID LPAREN parametros RPAREN tipo_retorno bloque
+               | FUNC ID LPAREN parametros RPAREN bloque'''
+    pass
+
+def p_parametros(p):
+    '''parametros : lista_parametros
+                  | empty'''
+    pass
+
+def p_lista_parametros(p):
+    '''lista_parametros : lista_parametros COMMA parametro
+                        | parametro'''
+    pass
+
+def p_parametro(p):
+    '''parametro : ID tipo
+                 | ID COMMA ID tipo
+                 | ID ELLIPSIS tipo
+                 | TIMES ID
+                 | UNDERSCORE tipo'''
+    pass
+
+def p_tipo_retorno(p):
+    '''tipo_retorno : tipo
+                    | LPAREN lista_tipos RPAREN'''
+    pass
+
+def p_lista_tipos(p):
+    '''lista_tipos : lista_tipos COMMA tipo
+                   | tipo'''
+    pass
+
+# ============================================================================
+# TIPOS DE DATOS
+# ============================================================================
+
+def p_tipo(p):
+    '''tipo : ID
+            | LBRACKET INT_LITERAL RBRACKET tipo
+            | LBRACKET RBRACKET tipo
+            | MAP LBRACKET tipo RBRACKET tipo
+            | TIMES tipo'''
+    pass
+
+# ============================================================================
+# BLOQUES Y SENTENCIAS
+# ============================================================================
+
+def p_bloque(p):
+    '''bloque : LBRACE sentencias RBRACE
+              | LBRACE RBRACE'''
+    pass
+
+def p_sentencias(p):
+    '''sentencias : sentencias sentencia
+                  | sentencia'''
+    pass
+
+def p_sentencia(p):
+    '''sentencia : declaracion_var
+                 | bloque_var
+                 | bloque_const
+                 | declaracion_const
+                 | asignacion
+                 | asignacion_multiple
+                 | declaracion_var_multiple
+                 | if_statement
+                 | for_statement
+                 | switch_statement
+                 | return_statement
+                 | expresion
+                 | impresion
+                 | ID INCREMENT
+                 | ID DECREMENT
+                 | empty'''
+    pass
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Javier Gutiérrez
+# ============================================================================
