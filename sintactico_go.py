@@ -323,6 +323,21 @@ def p_incremento(p):
 # Sección: Estructura de Control SWITCH
 # ============================================================================
 
+def p_switch_statement(p):
+    '''switch_statement : SWITCH expresion LBRACE casos RBRACE
+                        | SWITCH LBRACE casos RBRACE
+                        | SWITCH declaracion_var_corta SEMICOLON expresion LBRACE casos RBRACE'''
+    pass
+
+def p_casos(p):
+    '''casos : casos caso
+             | caso'''
+    pass
+
+def p_caso(p):
+    '''caso : CASE lista_expresiones COLON sentencias
+            | DEFAULT COLON sentencias'''
+    pass
 
 # ============================================================================
 # FIN CONTRIBUCIÓN: Jair Palaguachi
