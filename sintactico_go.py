@@ -359,9 +359,67 @@ def p_return_statement(p):
 # ============================================================================
 
 # ============================================================================
+# IMPRESIÓN (Compartido)
+# ============================================================================
+
+def p_impresion(p):
+    '''impresion : ID DOT ID LPAREN lista_expresiones RPAREN
+                 | ID DOT ID LPAREN RPAREN'''
+    pass
+
+
+# ============================================================================
 # CONTRIBUCIÓN: Jair Palaguachi (JairPalaguachi)
 # Sección: Expresiones Aritméticas y Lógicas
 # ============================================================================
+
+def p_expresion_binaria(p):
+    '''expresion : expresion PLUS expresion
+                 | expresion MINUS expresion
+                 | expresion TIMES expresion
+                 | expresion DIVIDE expresion
+                 | expresion MOD expresion
+                 | expresion AND expresion
+                 | expresion OR expresion
+                 | expresion EQ expresion
+                 | expresion NE expresion
+                 | expresion LT expresion
+                 | expresion LE expresion
+                 | expresion GT expresion
+                 | expresion GE expresion
+                 | expresion BITAND expresion
+                 | expresion BITOR expresion
+                 | expresion BITXOR expresion
+                 | expresion LSHIFT expresion
+                 | expresion RSHIFT expresion
+                 | expresion AND_NOT expresion'''
+    pass
+
+def p_expresion_unaria(p):
+    '''expresion : NOT expresion
+                 | MINUS expresion %prec UMINUS
+                 | PLUS expresion %prec UMINUS
+                 | BITXOR expresion
+                 | BITNOT expresion
+                 | ADDRESS expresion %prec ADDRESS
+                 | TIMES expresion %prec POINTER'''
+    pass
+
+
+def p_expresion_agrupada(p):
+    '''expresion : LPAREN expresion RPAREN'''
+    pass
+
+def p_expresion_primaria(p):
+    '''expresion : ID
+                 | INT_LITERAL
+                 | FLOAT_LITERAL
+                 | STRING_LITERAL
+                 | RUNE_LITERAL
+                 | BOOL_LITERAL
+                 | NIL'''
+    pass
+
 
 # ============================================================================
 # FIN CONTRIBUCIÓN: Jair Palaguachi
