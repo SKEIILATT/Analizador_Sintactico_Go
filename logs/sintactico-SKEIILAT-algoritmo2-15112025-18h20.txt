@@ -1,17 +1,14 @@
 ================================================================================
 ANÁLISIS SINTÁCTICO - LENGUAJE GO
 ================================================================================
-Archivo analizado: algoritmo3.go
-Fecha y hora: 15/11/2025 18:16:26
+Archivo analizado: algoritmo2.go
+Fecha y hora: 15/11/2025 18:20:47
 Usuario: SKEIILAT
 ================================================================================
 
-ERRORES SINTÁCTICOS ENCONTRADOS (4)
+ERRORES SINTÁCTICOS ENCONTRADOS (0)
 --------------------------------------------------------------------------------
-Error de sintaxis en '&' (Token: BITAND, Línea: 103)
-Error de sintaxis en '&' (Token: BITAND, Línea: 113)
-Error de sintaxis en 'int' (Token: ID, Línea: 141)
-Error de sintaxis en 'int' (Token: ID, Línea: 141)
+No se encontraron errores sintácticos.
 
 ================================================================================
 FIN DEL ANÁLISIS SINTÁCTICO
