@@ -130,6 +130,230 @@ def p_lista_ids(p):
 # ============================================================================
 
 # ============================================================================
+# CONTRIBUCIÓN: Javier Gutiérrez (SKEIILATT)
+# Sección: Asignaciones
+# ============================================================================
+
+def p_asignacion(p):
+    '''asignacion : ID ASSIGN expresion
+                  | ID PLUS_ASSIGN expresion
+                  | ID MINUS_ASSIGN expresion
+                  | ID TIMES_ASSIGN expresion
+                  | ID DIVIDE_ASSIGN expresion
+                  | ID LBRACKET expresion RBRACKET ASSIGN expresion
+                  | TIMES ID ASSIGN expresion'''
+    pass
+
+def p_asignacion_multiple(p):
+    '''asignacion_multiple : lista_ids ASSIGN lista_expresiones'''
+    pass
+
+
+# ============================================================================
+# DECLARACIONES DE CONSTANTES
+# ============================================================================
+
+def p_declaracion_const(p):
+    '''declaracion_const : CONST ID ASSIGN expresion
+                         | CONST ID tipo ASSIGN expresion'''
+    pass
+
+def p_bloque_const(p):
+    '''bloque_const : CONST LPAREN lista_decl_const RPAREN'''
+    pass
+
+def p_lista_decl_const(p):
+    '''lista_decl_const : lista_decl_const decl_const_bloque
+                        | decl_const_bloque'''
+    pass
+
+def p_decl_const_bloque(p):
+    '''decl_const_bloque : ID ASSIGN expresion
+                         | ID tipo ASSIGN expresion'''
+    pass
+
+# ============================================================================
+# FUNCIONES
+# ============================================================================
+
+def p_funcion(p):
+    '''funcion : FUNC ID LPAREN parametros RPAREN tipo_retorno bloque
+               | FUNC ID LPAREN parametros RPAREN bloque'''
+    pass
+
+def p_parametros(p):
+    '''parametros : lista_parametros
+                  | empty'''
+    pass
+
+def p_lista_parametros(p):
+    '''lista_parametros : lista_parametros COMMA parametro
+                        | parametro'''
+    pass
+
+def p_parametro(p):
+    '''parametro : ID tipo
+                 | ID COMMA ID tipo
+                 | ID ELLIPSIS tipo
+                 | TIMES ID
+                 | UNDERSCORE tipo'''
+    pass
+
+def p_tipo_retorno(p):
+    '''tipo_retorno : tipo
+                    | LPAREN lista_tipos RPAREN'''
+    pass
+
+def p_lista_tipos(p):
+    '''lista_tipos : lista_tipos COMMA tipo
+                   | tipo'''
+    pass
+
+# ============================================================================
+# TIPOS DE DATOS
+# ============================================================================
+
+def p_tipo(p):
+    '''tipo : ID
+            | LBRACKET INT_LITERAL RBRACKET tipo
+            | LBRACKET RBRACKET tipo
+            | MAP LBRACKET tipo RBRACKET tipo
+            | TIMES tipo'''
+    pass
+
+# ============================================================================
+# BLOQUES Y SENTENCIAS
+# ============================================================================
+
+def p_bloque(p):
+    '''bloque : LBRACE sentencias RBRACE
+              | LBRACE RBRACE'''
+    pass
+
+def p_sentencias(p):
+    '''sentencias : sentencias sentencia
+                  | sentencia'''
+    pass
+
+def p_sentencia(p):
+    '''sentencia : declaracion_var
+                 | bloque_var
+                 | bloque_const
+                 | declaracion_const
+                 | asignacion
+                 | asignacion_multiple
+                 | declaracion_var_multiple
+                 | if_statement
+                 | for_statement
+                 | switch_statement
+                 | return_statement
+                 | expresion
+                 | impresion
+                 | ID INCREMENT
+                 | ID DECREMENT
+                 | empty'''
+    pass
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Javier Gutiérrez
+# ============================================================================
+
+# ============================================================================
+# CONTRIBUCIÓN: Leonardo Macías (leodamac)
+# Sección: Estructura de Control IF-ELSE
+# ============================================================================
+
+def p_if_statement(p):
+    '''if_statement : IF condicion bloque
+                    | IF condicion bloque ELSE bloque
+                    | IF condicion bloque ELSE if_statement'''
+    pass
+
+def p_condicion(p):
+    '''condicion : expresion
+                 | declaracion_var_corta SEMICOLON expresion'''
+    pass
+
+def p_declaracion_var_corta(p):
+    '''declaracion_var_corta : ID DECLARE_ASSIGN expresion
+                             | lista_ids DECLARE_ASSIGN expresion'''
+    pass
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Leonardo Macías
+# ============================================================================
+
+# ============================================================================
+# CONTRIBUCIÓN: Javier Gutiérrez (SKEIILATT)
+# Sección: Estructura de Control FOR
+# ============================================================================
+
+def p_for_statement(p):
+    '''for_statement : FOR condicion bloque
+                     | FOR bloque
+                     | FOR inicializacion SEMICOLON condicion SEMICOLON incremento bloque
+                     | FOR ID COMMA ID DECLARE_ASSIGN RANGE expresion bloque
+                     | FOR ID DECLARE_ASSIGN RANGE expresion bloque
+                     | FOR ID COMMA ID ASSIGN RANGE expresion bloque
+                     | FOR UNDERSCORE COMMA ID DECLARE_ASSIGN RANGE expresion bloque
+                     | FOR ID COMMA UNDERSCORE DECLARE_ASSIGN RANGE expresion bloque
+                     | FOR UNDERSCORE COMMA UNDERSCORE DECLARE_ASSIGN RANGE expresion bloque'''
+    pass
+
+def p_inicializacion(p):
+    '''inicializacion : declaracion_var
+                      | asignacion
+                      | empty'''
+    pass
+
+def p_incremento(p):
+    '''incremento : asignacion
+                  | ID INCREMENT
+                  | ID DECREMENT
+                  | empty'''
+    pass
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Javier Gutiérrez
+# ============================================================================
+
+
+# ============================================================================
+# CONTRIBUCIÓN: Jair Palaguachi (JairPalaguachi)
+# Sección: Estructura de Control SWITCH
+# ============================================================================
+
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Jair Palaguachi
+# ============================================================================
+
+# ============================================================================
+# CONTRIBUCIÓN: Leonardo Macías (leodamac)
+# Sección: Return Statement
+# ============================================================================
+
+def p_return_statement(p):
+    '''return_statement : RETURN
+                        | RETURN expresion
+                        | RETURN lista_expresiones'''
+    pass
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Leonardo Macías
+# ============================================================================
+
+# ============================================================================
+# CONTRIBUCIÓN: Jair Palaguachi (JairPalaguachi)
+# Sección: Expresiones Aritméticas y Lógicas
+# ============================================================================
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Jair Palaguachi
+# ============================================================================
+
+
+# ============================================================================
 # CONTRIBUCIÓN: Leonardo Macías (leodamac)
 # Sección: Arrays - Acceso e Inicialización
 # ============================================================================
@@ -155,4 +379,69 @@ def p_fila_matriz(p):
 
 # ============================================================================
 # FIN CONTRIBUCIÓN: Leonardo Macías
+# ============================================================================
+
+# ============================================================================
+# CONTRIBUCIÓN: Javier Gutiérrez (SKEIILATT)
+# Sección: Slices
+# ============================================================================
+
+def p_slice_literal(p):
+    '''expresion : LBRACKET RBRACKET tipo LBRACE lista_expresiones RBRACE
+                 | LBRACKET RBRACKET tipo LBRACE RBRACE'''
+    pass
+
+def p_slice_operacion(p):
+    '''expresion : ID LBRACKET expresion COLON expresion RBRACKET
+                 | ID LBRACKET COLON expresion RBRACKET
+                 | ID LBRACKET expresion COLON RBRACKET
+                 | ID LBRACKET COLON RBRACKET'''
+    pass
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Javier Gutiérrez
+# ============================================================================
+
+
+# ============================================================================
+# CONTRIBUCIÓN: Jair Palaguachi (JairPalaguachi)
+# Sección: Maps
+# ============================================================================
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Jair Palaguachi
+# ============================================================================
+
+# ============================================================================
+# MANEJO DE ERRORES SINTÁCTICOS - Leonardo
+# ============================================================================
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Leonardo
+# ============================================================================
+
+
+# ============================================================================
+# FUNCIONES DE ANÁLISIS Y LOGGING - Jair
+# ============================================================================
+
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Jair
+# ============================================================================
+
+# ============================================================================
+# MANEJO DE ERRORES SINTÁCTICOS - Leonardo
+# ============================================================================
+
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Leonardo
+# ============================================================================
+
+
+
+
+# ============================================================================
+# PUNTO DE ENTRADA - Javier
 # ============================================================================
