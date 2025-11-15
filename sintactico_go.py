@@ -78,3 +78,53 @@ def p_declaracion(p):
                    | declaracion_const
                    | empty'''
     pass
+
+# ============================================================================
+# CONTRIBUCIÓN: Leonardo Macías (leodamac)
+# Sección: Declaraciones de Variables
+# ============================================================================
+
+def p_declaracion_var_global(p):
+    '''declaracion_var_global : VAR ID tipo
+                              | VAR ID tipo ASSIGN expresion
+                              | VAR ID ASSIGN expresion'''
+    pass
+
+def p_bloque_var(p):
+    '''bloque_var : VAR LPAREN lista_decl_bloque RPAREN'''
+    pass
+
+def p_lista_decl_bloque(p):
+    '''lista_decl_bloque : lista_decl_bloque decl_var_bloque
+                         | decl_var_bloque'''
+    pass
+
+def p_decl_var_bloque(p):
+    '''decl_var_bloque : ID tipo
+                       | ID tipo ASSIGN expresion
+                       | ID ASSIGN expresion'''
+    pass
+
+def p_declaracion_var(p):
+    '''declaracion_var : VAR ID tipo
+                       | VAR ID tipo ASSIGN expresion
+                       | VAR ID ASSIGN expresion
+                       | ID DECLARE_ASSIGN expresion'''
+    pass
+
+def p_declaracion_var_multiple(p):
+    '''declaracion_var_multiple : VAR lista_ids tipo
+                                | VAR lista_ids tipo ASSIGN lista_expresiones
+                                | lista_ids DECLARE_ASSIGN lista_expresiones'''
+    pass
+
+def p_lista_ids(p):
+    '''lista_ids : lista_ids COMMA ID
+                 | lista_ids COMMA UNDERSCORE
+                 | ID
+                 | UNDERSCORE'''
+    pass
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Leonardo Macías
+# ============================================================================
