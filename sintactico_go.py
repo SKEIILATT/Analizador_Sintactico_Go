@@ -128,3 +128,28 @@ def p_lista_ids(p):
 # ============================================================================
 # FIN CONTRIBUCIÓN: Leonardo Macías
 # ============================================================================
+
+ ============================================================================
+# CONTRIBUCIÓN: Leonardo Macías (leodamac)
+# Sección: Estructura de Control IF-ELSE
+# ============================================================================
+
+def p_if_statement(p):
+    '''if_statement : IF condicion bloque
+                    | IF condicion bloque ELSE bloque
+                    | IF condicion bloque ELSE if_statement'''
+    pass
+
+def p_condicion(p):
+    '''condicion : expresion
+                 | declaracion_var_corta SEMICOLON expresion'''
+    pass
+
+def p_declaracion_var_corta(p):
+    '''declaracion_var_corta : ID DECLARE_ASSIGN expresion
+                             | lista_ids DECLARE_ASSIGN expresion'''
+    pass
+
+# ============================================================================
+# FIN CONTRIBUCIÓN: Leonardo Macías
+# ============================================================================
