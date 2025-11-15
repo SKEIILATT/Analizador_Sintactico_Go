@@ -514,6 +514,31 @@ def p_slice_operacion(p):
 # Sección: Maps
 # ============================================================================
 
+def p_map_literal(p):
+    '''expresion : MAP LBRACKET tipo RBRACKET tipo LBRACE pares_mapa RBRACE
+                 | MAP LBRACKET tipo RBRACKET tipo LBRACE RBRACE'''
+    pass
+
+def p_pares_mapa(p):
+    '''pares_mapa : pares_mapa COMMA par_mapa
+                  | par_mapa'''
+    pass
+
+def p_par_mapa(p):
+    '''par_mapa : expresion COLON expresion'''
+    pass
+
+
+def p_lista_expresiones(p):
+    '''lista_expresiones : lista_expresiones COMMA expresion
+                         | expresion'''
+    pass
+
+# Regla para producciones vacías
+def p_empty(p):
+    '''empty :'''
+    pass
+
 # ============================================================================
 # FIN CONTRIBUCIÓN: Jair Palaguachi
 # ============================================================================
