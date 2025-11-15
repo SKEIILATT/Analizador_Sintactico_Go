@@ -451,16 +451,53 @@ parser = yacc.yacc()
 # ============================================================================
 
 # ============================================================================
-# MANEJO DE ERRORES SINTÁCTICOS - Leonardo
+# CONTRIBUCIÓN: Leonardo Macias (leodamac)
+# MANEJO DE ERRORES SINTÁCTICOS GENERACIÓN DE LOGS
 # ============================================================================
-
+def generate_log(source_filename):
+    """
+    Genera un archivo de log con los errores sintácticos encontrados.
+    """
+    # Crear carpeta de logs si no existe
+    if not os.path.exists('logs'):
+        os.makedirs('logs')
+    
+    # Obtener información del usuario de git
+    git_user = get_git_username()
+    
+    # Generar nombre del archivo de log
+    now = datetime.now()
+    base = os.path.splitext(os.path.basename(source_filename))[0]
+    timestamp = now.strftime('%d%m%Y-%Hh%M')
+    log_filename = f"logs/sintactico-{git_user}-{base}-{timestamp}.txt"
+    
+    # Escribir el log
+    with open(log_filename, 'w', encoding='utf-8') as log_file:
+        log_file.write("="*80 + "\n")
+        log_file.write(f"ANÁLISIS SINTÁCTICO - LENGUAJE GO\n")
+        log_file.write("="*80 + "\n")
+        log_file.write(f"Archivo analizado: {source_filename}\n")
+        log_file.write(f"Fecha y hora: {now.strftime('%d/%m/%Y %H:%M:%S')}\n")
+        log_file.write(f"Usuario: {git_user}\n")
+        log_file.write("="*80 + "\n\n")
+        
+        log_file.write(f"ERRORES SINTÁCTICOS ENCONTRADOS ({len(log_errors)})\n")
+        log_file.write("-"*80 + "\n")
+        if log_errors:
+            for error in log_errors:
+                log_file.write(error + "\n")
+        else:
+            log_file.write("No se encontraron errores sintácticos.\n")
+        
+        log_file.write("\n" + "="*80 + "\n")
+        log_file.write("FIN DEL ANÁLISIS SINTÁCTICO\n")
+        log_file.write("="*80 + "\n")
+    
+    print(f"\nLog generado exitosamente: {log_filename}")
 
 # ============================================================================
 # FIN CONTRIBUCIÓN: Leonardo
 # ============================================================================
-
-
-
 
 # ============================================================================
 # PUNTO DE ENTRADA - Javier
