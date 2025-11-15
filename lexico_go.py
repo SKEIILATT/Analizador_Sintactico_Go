@@ -44,8 +44,6 @@ reserved = {
     'switch': 'SWITCH',
     'type': 'TYPE',
     'var': 'VAR',
-
-    ## Se agregaron estas adicionales en base al algoritmo 3
     'nil': 'NIL',
     'len': 'LEN',
     'make': 'MAKE',
@@ -131,6 +129,7 @@ tokens = [
 # ============================================================================
 # FIN CONTRIBUCIÓN: Jair Palaguachi
 # ============================================================================
+
 # ============================================================================
 # CONTRIBUCIÓN: Javier Gutiérrez (SKEIILATT)
 # Sección: Expresiones Regulares para Tokens Simples
@@ -230,7 +229,7 @@ def t_RUNE_LITERAL(t):
     r"'([^'\\]|\\.)'"
     return t
 
-# Blank identifier 
+# Blank identifier (DEBE ir ANTES de ID)
 def t_UNDERSCORE(t):
     r'_(?![a-zA-Z0-9_])'
     return t
@@ -245,7 +244,6 @@ def t_ID(t):
 # FIN CONTRIBUCIÓN: Leonardo Macías
 # ============================================================================
 
-    
 # ============================================================================
 # CONTRIBUCIÓN COMPARTIDA: Manejo de Comentarios y Espacios
 # ============================================================================

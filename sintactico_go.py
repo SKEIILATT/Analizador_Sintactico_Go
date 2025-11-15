@@ -6,6 +6,7 @@ Integrantes:
 - Javier Gutiérrez (SKEIILATT)
 - Leonardo Macías (leodamac)
 """
+
 import ply.yacc as yacc
 from lexico_go import tokens, lexer
 from datetime import datetime
@@ -41,7 +42,7 @@ def p_package_decl(p):
     pass
 
 # ============================================================================
-# IMPORTS 
+# IMPORTS - Soporta múltiples formas
 # ============================================================================
 
 def p_imports(p):
@@ -62,7 +63,7 @@ def p_lista_imports(p):
     pass
 
 # ============================================================================
-# DECLARACIONES A NIVEL DE PROGRAMA EN GO
+# DECLARACIONES A NIVEL DE PROGRAMA
 # ============================================================================
 
 def p_declaraciones(p):
@@ -148,6 +149,9 @@ def p_asignacion_multiple(p):
     '''asignacion_multiple : lista_ids ASSIGN lista_expresiones'''
     pass
 
+# ============================================================================
+# FIN CONTRIBUCIÓN: Javier Gutiérrez
+# ============================================================================
 
 # ============================================================================
 # DECLARACIONES DE CONSTANTES
@@ -201,7 +205,13 @@ def p_parametro(p):
 
 def p_tipo_retorno(p):
     '''tipo_retorno : tipo
-                    | LPAREN lista_tipos RPAREN'''
+                    | LPAREN lista_tipos RPAREN
+                    | LPAREN lista_retornos_nombrados RPAREN'''
+    pass
+
+def p_lista_retornos_nombrados(p):
+    '''lista_retornos_nombrados : lista_retornos_nombrados COMMA ID tipo
+                                 | ID tipo'''
     pass
 
 def p_lista_tipos(p):
@@ -253,10 +263,6 @@ def p_sentencia(p):
                  | ID DECREMENT
                  | empty'''
     pass
-
-# ============================================================================
-# FIN CONTRIBUCIÓN: Javier Gutiérrez
-# ============================================================================
 
 # ============================================================================
 # CONTRIBUCIÓN: Leonardo Macías (leodamac)
@@ -317,7 +323,6 @@ def p_incremento(p):
 # FIN CONTRIBUCIÓN: Javier Gutiérrez
 # ============================================================================
 
-
 # ============================================================================
 # CONTRIBUCIÓN: Jair Palaguachi (JairPalaguachi)
 # Sección: Estructura de Control SWITCH
@@ -367,7 +372,6 @@ def p_impresion(p):
                  | ID DOT ID LPAREN RPAREN'''
     pass
 
-
 # ============================================================================
 # CONTRIBUCIÓN: Jair Palaguachi (JairPalaguachi)
 # Sección: Expresiones Aritméticas y Lógicas
@@ -402,9 +406,12 @@ def p_expresion_unaria(p):
                  | BITXOR expresion
                  | BITNOT expresion
                  | ADDRESS expresion %prec ADDRESS
+                 | BITAND expresion %prec ADDRESS
                  | TIMES expresion %prec POINTER'''
     pass
-
+# ============================================================================
+# FIN CONTRIBUCIÓN: Jair Palaguachi
+# ============================================================================
 
 def p_expresion_agrupada(p):
     '''expresion : LPAREN expresion RPAREN'''
@@ -455,11 +462,6 @@ def p_expresion_new(p):
     pass
 
 # ============================================================================
-# FIN CONTRIBUCIÓN: Jair Palaguachi
-# ============================================================================
-
-
-# ============================================================================
 # CONTRIBUCIÓN: Leonardo Macías (leodamac)
 # Sección: Arrays - Acceso e Inicialización
 # ============================================================================
@@ -508,7 +510,6 @@ def p_slice_operacion(p):
 # FIN CONTRIBUCIÓN: Javier Gutiérrez
 # ============================================================================
 
-
 # ============================================================================
 # CONTRIBUCIÓN: Jair Palaguachi (JairPalaguachi)
 # Sección: Maps
@@ -516,6 +517,7 @@ def p_slice_operacion(p):
 
 def p_map_literal(p):
     '''expresion : MAP LBRACKET tipo RBRACKET tipo LBRACE pares_mapa RBRACE
+                 | MAP LBRACKET tipo RBRACKET tipo LBRACE pares_mapa COMMA RBRACE
                  | MAP LBRACKET tipo RBRACKET tipo LBRACE RBRACE'''
     pass
 
@@ -528,6 +530,9 @@ def p_par_mapa(p):
     '''par_mapa : expresion COLON expresion'''
     pass
 
+# ============================================================================
+# FIN CONTRIBUCIÓN: Jair Palaguachi
+# ============================================================================
 
 def p_lista_expresiones(p):
     '''lista_expresiones : lista_expresiones COMMA expresion
@@ -540,11 +545,6 @@ def p_empty(p):
     pass
 
 # ============================================================================
-# FIN CONTRIBUCIÓN: Jair Palaguachi
-# ============================================================================
-
-# ============================================================================
-# CONTRIBUCIÓN: Leonardo Macias (leodamac)
 # MANEJO DE ERRORES SINTÁCTICOS
 # ============================================================================
 
@@ -568,12 +568,7 @@ def p_error(p):
 parser = yacc.yacc()
 
 # ============================================================================
-# FIN CONTRIBUCIÓN: Leonardo
-# ============================================================================
-
-
-# ============================================================================
-# FUNCIONES DE ANÁLISIS Y LOGGING - Jair
+# FUNCIONES DE ANÁLISIS Y LOGGING
 # ============================================================================
 
 def analyze_file(filename):
@@ -636,15 +631,7 @@ def get_git_username():
             return 'usuario'
     except:
         return 'usuario'
-    
-# ============================================================================
-# FIN CONTRIBUCIÓN: Jair
-# ============================================================================
 
-# ============================================================================
-# CONTRIBUCIÓN: Leonardo Macias (leodamac)
-# MANEJO DE ERRORES SINTÁCTICOS GENERACIÓN DE LOGS
-# ============================================================================
 def generate_log(source_filename):
     """
     Genera un archivo de log con los errores sintácticos encontrados.
@@ -687,9 +674,14 @@ def generate_log(source_filename):
     print(f"\nLog generado exitosamente: {log_filename}")
 
 # ============================================================================
-# FIN CONTRIBUCIÓN: Leonardo
+# PUNTO DE ENTRADA
 # ============================================================================
 
-# ============================================================================
-# PUNTO DE ENTRADA - Javier
-# ============================================================================
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print("Uso: python sintactico_go.py <archivo.go>")
+        print("Ejemplo: python sintactico_go.py algoritmo1.go")
+        sys.exit(1)
+    
+    filename = sys.argv[1]
+    analyze_file(filename)
